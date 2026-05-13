@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: amber-folio
-        image: danielolaiya56/amber-folio:77e97578edd4572ce5f907b92df2637b742100cf
+        image: danielolaiya56/amber-folio:e626644b4d69b9b938cda888e644dec22554bcd2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
