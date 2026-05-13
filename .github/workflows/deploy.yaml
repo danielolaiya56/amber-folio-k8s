@@ -25,3 +25,16 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/amber-folio:${{ github.sha }}
+
+    - name: Update deployment image tag
+      run: |
+        sed -i "s|image:.*amber-folio.*|image: ${{ secrets.DOCKER_USERNAME }}/amber-folio:${{ github.sha }}|g" deployment.yaml
+        sed -i "s|imagePullPolicy: Never|imagePullPolicy: Always|g" deployment.yaml
+
+    - name: Commit and push updated deployment
+      run: |
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Actions"
+        git add deployment.yaml
+        git commit -m "ci: update image tag to ${{ github.sha }}"
+        git push
